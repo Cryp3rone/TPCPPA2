@@ -10,6 +10,7 @@ APaintBall::APaintBall()
 	PrimaryActorTick.bCanEverTick = true;
 
 	Sphere = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Sphere"));
+	Sphere->OnComponentHit.AddDynamic(this, &APaintBall::OnHit);
 	RootComponent = Sphere;
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileComponent"));
@@ -46,6 +47,9 @@ void APaintBall::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimit
 		DecalActor->SetLifeSpan(6.f);
 		DecalActor->SetActorRotation(Hit.Normal.Rotation());
 		DecalActor->SetDecalMaterial(Decal);
-		DecalActor->GetDecal()->DecalSize = FVector(30.f, 30.f, 30.f);
+		DecalActor->GetDecal()->DecalSize = FVector(100.f, 100.f, 100.f);
+		DecalActor->GetDecal()->SetFadeOut(1.f, 5.f);
 	}
+
+	Destroy();
 }

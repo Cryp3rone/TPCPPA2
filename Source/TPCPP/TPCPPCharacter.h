@@ -53,6 +53,7 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
 
+
 protected:
 
 	/** Resets HMD orientation in VR. */
@@ -63,6 +64,8 @@ protected:
 
 	/** Called for side to side input */
 	void MoveRight(float Value);
+
+	void StrafeRight(float Val);
 
 	/** 
 	 * Called via input to turn at a given rate. 
@@ -93,6 +96,13 @@ protected:
 
 	UFUNCTION()
 	void Shooting();
+
+	UFUNCTION()
+	void Running();
+
+	UFUNCTION()
+	void StopRunning();
+
 
 protected:
 	// APawn interface

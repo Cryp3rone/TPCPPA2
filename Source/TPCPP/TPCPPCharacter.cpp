@@ -61,7 +61,6 @@ ATPCPPCharacter::ATPCPPCharacter()
 	BulletSpawn = CreateDefaultSubobject<USceneComponent>(TEXT("BulletSpawn"));
 	BulletSpawn->SetRelativeLocation(FVector(80.f, 0.f, 60.f));
 	BulletSpawn->SetupAttachment(RootComponent);
-	
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -95,6 +94,8 @@ void ATPCPPCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInp
 	PlayerInputComponent->BindAction("PickUp", IE_Pressed, this, &ATPCPPCharacter::OnPickupPressed);
 	PlayerInputComponent->BindAction("PickUp", IE_Released, this, &ATPCPPCharacter::OnPickupReleased);
 	PlayerInputComponent->BindAction("Shoot", IE_Released, this, &ATPCPPCharacter::Shooting);
+	PlayerInputComponent->BindAction("Run", IE_Pressed, this, &ATPCPPCharacter::Running);
+	PlayerInputComponent->BindAction("Run", IE_Released, this, &ATPCPPCharacter::StopRunning);
 }
 
 
@@ -224,3 +225,18 @@ void ATPCPPCharacter::Shooting()
 {
 	GetWorld()->SpawnActor<APaintBall>(PaintBall, BulletSpawn->GetComponentLocation(), FollowCamera->GetComponentRotation());
 }
+
+void ATPCPPCharacter::Running()
+{
+	GetCharacterMovement();
+	if (GetCharacterMovement() != nullptr)
+		GetCharacterMovement()->MaxWalkSpeed = 600;
+}
+
+void ATPCPPCharacter::StopRunning()
+{
+	GetCharacterMovement();
+	if (GetCharacterMovement() != nullptr)
+		GetCharacterMovement()->MaxWalkSpeed = 200;
+}
+
