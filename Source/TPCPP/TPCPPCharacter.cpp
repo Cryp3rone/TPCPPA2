@@ -66,6 +66,11 @@ ATPCPPCharacter::ATPCPPCharacter()
 //////////////////////////////////////////////////////////////////////////
 // Input
 
+void ATPCPPCharacter::TakeDamage(int DamageAmount)
+{
+	Health -= DamageAmount;
+}
+
 void ATPCPPCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	// Set up gameplay key bindings

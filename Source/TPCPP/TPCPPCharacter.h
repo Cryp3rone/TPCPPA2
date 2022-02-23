@@ -24,7 +24,7 @@ public:
 	UPROPERTY(EditAnywhere)
 	int MaxHealth;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	int Health;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
@@ -102,6 +102,9 @@ protected:
 
 	UFUNCTION()
 	void StopRunning();
+
+	UFUNCTION(BlueprintCallable)
+	void TakeDamage(int DamageAmount);
 
 
 protected:
